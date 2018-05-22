@@ -20,7 +20,14 @@ describe("Gilded Rose", function() {
      before = example.quality;
      gildedRose.updateQuality();
      after = example.quality;
-     
+
      expect(after).toBeLessThan(before);
+  });
+
+  it("shouldn't degrade quality below 0", function() {
+    var example = new Item('thing', 10, 0);
+    gildedRose.items.push(example);
+    gildedRose.updateQuality();
+    expect(example.quality).toBe(0);
   });
 });
