@@ -30,4 +30,16 @@ describe("Gilded Rose", function() {
     gildedRose.updateQuality();
     expect(example.quality).toBe(0);
   });
+
+  it("should increase quality of Agred brie as it ages", function(){
+    var before;
+    var after;
+    var agedBrie = new Item('Aged Brie', 100, 50);
+
+    gildedRose.items.push(agedBrie);
+    before = agedBrie.quality;
+    gildedRose.updateQuality();
+    after = agedBrie.quality;
+    expect(before).toBeLessThan(after);
+  });
 });
