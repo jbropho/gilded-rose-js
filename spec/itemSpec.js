@@ -5,5 +5,5 @@ describe('Item', function() {
        var item = new Item('example', 100, 100);
        expect(item.quality).toBe(50);
     });
-  })
+  });
 });

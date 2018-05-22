@@ -1,0 +1,2 @@
+- item quality <= 50 should be enforced at init +
+   shouldn't be allowed to go above 50 when mutated, e.g. aged brie

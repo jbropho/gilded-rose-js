@@ -1,5 +1,7 @@
 describe("Gilded Rose", function() {
     var gildedRose;
+    var before;
+    var after;
 
    beforeEach(function() {
      gildedRose = new Shop();
@@ -12,8 +14,6 @@ describe("Gilded Rose", function() {
   });
 
   it("should degrade in quality", function(){
-     var before;
-     var after;
      var example = new Item('thing', 10, 50);
 
      gildedRose.items.push(example);
@@ -32,8 +32,6 @@ describe("Gilded Rose", function() {
   });
 
   it("should increase quality of Agred brie as it ages", function(){
-    var before;
-    var after;
     var agedBrie = new Item('Aged Brie', 100, 50);
 
     gildedRose.items.push(agedBrie);
@@ -41,5 +39,32 @@ describe("Gilded Rose", function() {
     gildedRose.updateQuality();
     after = agedBrie.quality;
     expect(before).toBeLessThan(after);
+  });
+
+  describe('Sulfuras', function(){
+    var sulfura;
+
+    beforeEach(function() {
+      sulfura =  new Item('Sulfuras, Hand of Ragnaros', 40, 40);
+    });
+
+    it('does not degrade in quality', function() {
+      gildedRose.items.push(sulfura);
+
+      before = sulfura.quality;
+      gildedRose.updateQuality();
+      after = sulfura.quality;
+
+      expect(before).toEqual(after);
+    });
+
+    it('sell in date does not decrease', function() {
+      gildedRose.items.push(sulfura);
+
+      before = sulfura.sellIn;
+      gildedRose.updateQuality();
+      after = sulfura.sellIn;
+      expect(before).toEqual(after);
+    });
   });
 });
