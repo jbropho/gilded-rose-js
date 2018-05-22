@@ -61,7 +61,3 @@ class Shop {
     return this.items;
   }
 }
-const gildedRose = new Shop();
-
-gildedRose.items.push('thing')
-console.log(gildedRose)
