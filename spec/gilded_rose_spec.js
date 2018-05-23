@@ -32,7 +32,7 @@ describe("Gilded Rose", function() {
   });
 
   it("should increase quality of Agred brie as it ages", function(){
-    var agedBrie = new Item('Aged Brie', 100, 50);
+    var agedBrie = new Item('Aged Brie', 100, 30);
 
     gildedRose.items.push(agedBrie);
     before = agedBrie.quality;
