@@ -69,6 +69,27 @@ describe("Gilded Rose", function() {
     expect(firstDecrease * 2).toEqual(secondDecrease);
   });
 
+  describe('Conjured items', function() {
+    it('decreases in quality 2* as fast as normal item', function() {
+       var conjured = new Item('Conjured', 10, 50);
+       var normal = new Item('Normal', 10, 50);
+       var conjuredBefore = conjured.quality;
+       var normalBefore = normal.quality;
+       var conjuredDiff;
+       var normalDiff;
+
+       gildedRose.items.push(normal);
+       gildedRose.items.push(conjured);
+
+       gildedRose.updateQuality();
+
+       conjuredDiff = conjuredBefore - conjured.quality;
+       normalDiff = normalBefore - normal.quality;
+
+       expect(normalDiff * 2).toEqual(conjuredDiff);
+    });
+  });
+
   describe('Sulfuras', function(){
     var sulfura;
 
