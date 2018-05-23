@@ -41,11 +41,39 @@ describe("Gilded Rose", function() {
     expect(before).toBeLessThan(after);
   });
 
+  it("should not increase quality above 50", function() {
+    var agedBrie = new Item('Aged Brie', 20, 50);
+
+    gildedRose.items.push(agedBrie);
+    before = agedBrie.quality;
+    gildedRose.updateQuality();
+    after = agedBrie.quality;
+    expect(before).toEqual(after);
+  });
+
+  it("should degrade quality by 2* once sell by passes", function() {
+    var firstDecrease;
+    var secondDecrease;
+    var example = new Item('thing', 1, 10);
+    var startQuality = example.quality;
+    var secondQuality;
+    gildedRose.items.push(example);
+
+    gildedRose.updateQuality();
+    secondQuality = example.quality;
+    firstDecrease = startQuality - secondQuality;
+
+    gildedRose.updateQuality();
+    secondDecrease = secondQuality - example.quality;
+
+    expect(firstDecrease * 2).toEqual(secondDecrease);
+  });
+
   describe('Sulfuras', function(){
     var sulfura;
 
     beforeEach(function() {
-      sulfura =  new Item('Sulfuras, Hand of Ragnaros', 40, 40);
+      sulfura =  new Item('Sulfuras, Hand of Ragnaros', 40, 80);
     });
 
     it('does not degrade in quality', function() {
@@ -68,4 +96,40 @@ describe("Gilded Rose", function() {
     });
   });
 
+  describe('Backstage passes', function() {
+     var backstagePass;
+     var before;
+     var after;
+
+     it('quality +=2 when days <= 10', function() {
+       backstagePass = new Item('Backstage passes to a TAFKAL80ETC concert', 9, 10);
+       gildedRose.items.push(backstagePass);
+       
+       before = backstagePass.quality;
+       gildedRose.updateQuality();
+       after = backstagePass.quality;
+
+       expect(after - before).toEqual(2);
+     });
+
+     it('quality +=3 when days <= 5', function() {
+      backstagePass = new Item('Backstage passes to a TAFKAL80ETC concert', 5, 10);
+      gildedRose.items.push(backstagePass);
+
+      before = backstagePass.quality;
+      gildedRose.updateQuality();
+      after = backstagePass.quality;
+
+      expect(after - before).toEqual(3);
+     });
+     
+     it('quality === 0 when days === 0', function() {
+      backstagePass = new Item('Backstage passes to a TAFKAL80ETC concert', 0, 10);
+      gildedRose.items.push(backstagePass);
+
+      gildedRose.updateQuality();
+      expect(backstagePass.quality).toEqual(0);
+     });
+   });
 });
+
