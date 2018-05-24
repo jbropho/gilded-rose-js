@@ -159,6 +159,7 @@ describe("Gilded Rose", function() {
         Shop.calcBackstageQuality(pass);
         expect(pass.quality).toBe(42);
      });
+     
      it('should not increase quality above 50', function() {
         var pass = { sellIn: 5, quality: 49};
         Shop.calcBackstageQuality(pass);
