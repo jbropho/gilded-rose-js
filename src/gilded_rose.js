@@ -10,6 +10,11 @@ class GildedItem extends Item {
   constructor(name, sellIn, quality) {
     super(name, sellIn, quality);
   }
+
+  isSpecial() {
+    var specialityItems = ['Sulfuras, Hand of Ragnaros', 'Aged Brie', 'Backstage passes to a TAFKAL80ETC concert', 'Conjured'];
+    return specialityItems.includes(this.name);
+  }
 }
 
 class Shop {
