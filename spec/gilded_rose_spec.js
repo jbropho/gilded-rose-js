@@ -162,18 +162,18 @@ describe("Gilded Rose", function() {
    describe('calcBackstageValue', function(){
      it('should += 1 when quality < 50 && sellIn < 11', function() {
          var pass = { sellIn: 10, quality: 40 };
-         Shop.calcBackstageValue(pass);
+         Shop.calcBackstageQuality(pass);
          expect(pass.quality).toBe(41);
      });
 
      it('should += 2 when quality < 49 && sellIn < 6', function() {
         var pass = { sellIn: 5, quality: 40};
-        Shop.calcBackstageValue(pass);
+        Shop.calcBackstageQuality(pass);
         expect(pass.quality).toBe(42);
      });
      it('should not increase quality above 50', function() {
         var pass = { sellIn: 5, quality: 49};
-        Shop.calcBackstageValue(pass);
+        Shop.calcBackstageQuality(pass);
         expect(pass.quality).toBe(50);
      });
    });

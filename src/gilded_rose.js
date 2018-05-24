@@ -29,6 +29,12 @@ class Shop {
     }
   }
 
+  static calcBackstageQuality(item) {
+    if (item.sellIn < 11) item.quality += 1;
+    if (item.sellIn < 6) item.quality += 1;
+    Shop.limitItemQuality(item); 
+  }
+
   updateQuality() {
     this.items.forEach(function(item){
       if (!Shop.nameIsInArray(item, ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert', 'Sulfuras, Hand of Ragnaros'])) {
