@@ -23,24 +23,22 @@ class Shop {
 
   updateQuality() {
     this.items.forEach(function(item){
-      if ( !Shop.nameIsInArray(item, ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert', 'Sulfuras, Hand of Ragnaros'])) {
+      if (!Shop.nameIsInArray(item, ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert', 'Sulfuras, Hand of Ragnaros'])) {
         if (item.quality > 0) {
             item.quality -= 1;
-          if (item.name === 'Conjured') {
-            item.quality -= 1;
-          }
-        } // all code below here deals with Backstage passes, sulfuras and aged brie
+        if (item.name === 'Conjured') {
+          item.quality -= 1;
+        }
+        } 
       } else {
-        // all items increase quality += 1 if quality < 50 
         if (item.quality < 50) {
-          item.quality = item.quality + 1;
-          //  backstage pass +1 if sellIn < 11
+          item.quality += 1;
           if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
             if (item.sellIn < 11) {
               if (item.quality < 50) {
                 item.quality += 1;
               }
-            } // backstage pass +1 if sellIn < 6
+            } 
             if (item.sellIn < 6) {
               if (item.quality < 50) {
                 item.quality += 1;
@@ -50,14 +48,14 @@ class Shop {
         }
       }
       if (item.name != 'Sulfuras, Hand of Ragnaros') {
-        item.sellIn = item.sellIn - 1;
+        item.sellIn -= 1;
       }
       if (item.sellIn < 0) {
           if (item.quality > 0) {
-            if ( !Shop.nameIsInArray(item, ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert', 'Sulfuras, Hand of Ragnaros'])) {
+            if (!Shop.nameIsInArray(item, ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert', 'Sulfuras, Hand of Ragnaros'])) {
                 item.quality -= 1;
             } else {
-            item.quality = item.quality - item.quality;
+            item.quality = 0;
           }
            } else {
             if (item.quality < 50) {
