@@ -18,4 +18,23 @@ describe('Gilded Item', function() {
       expect(sulfuras.isSpecial()).toBe(true);
     });
   });
+
+  describe('updateQuality', function() {
+    it('reduces item quality by 1', function() {
+      var randomItem = new GildedItem('someThing', 10, 10);
+      var before = randomItem.quality;
+      var after;
+
+      randomItem.updateQuality()
+      after = randomItem.quality;
+
+      expect(before - after).toEqual(1);
+    });
+
+    it('does not reduce quality below 0', function() {
+      var randomItem = new GildedItem('someThing', 10, 0);
+      randomItem.updateQuality();
+      expect(randomItem.quality).toBe(0);
+    });
+  });
 });
