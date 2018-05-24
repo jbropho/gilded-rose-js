@@ -19,6 +19,14 @@ describe('Gilded Item', function() {
     });
   });
 
+  describe('limitQuality', function() {
+    it('limits quality to 50', function() {
+      var randomItem = new GildedItem('someThing', 10, 55);
+      randomItem.limitQuality();
+      expect(randomItem.quality).toBe(50);
+    })
+  });
+
   describe('updateQuality', function() {
     it('reduces item quality by 1', function() {
       var randomItem = new GildedItem('someThing', 10, 10);
@@ -50,5 +58,59 @@ describe('Gilded Item', function() {
      notSulfura.updateSellIn();
      expect(notSulfura.sellIn).toEqual(79);
     });
- });
+  });
+
+  describe('back stage pass', function() {
+    it('increases in quality by 1 when sellIn < 11', function() {
+      var backstage = new BackstagePass('TAFKAL80ETC', 10, 10);
+      var before = backstage.quality;
+      var after;
+      
+      backstage.updateQuality();
+      after = backstage.quality;
+
+      expect(after - before).toEqual(1);
+    });
+    it('increases in quality by 2 when sellIn < 6', function() {
+      var backstage = new BackstagePass('TAFKAL80ETC', 5, 10);
+      var before = backstage.quality;
+      var after;
+      
+      backstage.updateQuality();
+      after = backstage.quality;
+
+      expect(after - before).toEqual(2);
+    });
+    it('should not increase above 50', function() {
+      var backstage = new BackstagePass('TAFKAL80ETC', 5, 50);
+      var before = backstage.quality;
+      var after;
+      
+      backstage.updateQuality();
+      after = backstage.quality;
+
+      expect(after).toEqual(before);
+    });
+  });
+});
+
+
+describe('calcBackstageValue', function(){
+  it('should += 1 when quality < 50 && sellIn < 11', function() {
+      var pass = { sellIn: 10, quality: 40 };
+      Shop.calcBackstageQuality(pass);
+      expect(pass.quality).toBe(41);
+  });
+
+  it('should += 2 when quality < 49 && sellIn < 6', function() {
+     var pass = { sellIn: 5, quality: 40};
+     Shop.calcBackstageQuality(pass);
+     expect(pass.quality).toBe(42);
+  });
+  
+  it('should not increase quality above 50', function() {
+     var pass = { sellIn: 5, quality: 49};
+     Shop.calcBackstageQuality(pass);
+     expect(pass.quality).toBe(50);
+  });
 });

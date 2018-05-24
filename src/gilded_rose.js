@@ -20,8 +20,27 @@ class GildedItem extends Item {
     if (this.quality > 0) this.quality--;
   }
 
+  limitQuality() {
+    if (this.quality > 50) this.quality = 50;
+  }
+
   updateSellIn() {
     if (this.name !== 'Sulfuras, Hand of Ragnaros') this.sellIn -= 1;
+  }
+}
+
+class BackstagePass extends GildedItem {
+  constructor(name, sellIn, quality) {
+    super(name, sellIn, quality);
+  }
+
+  updateQuality() {
+    if (this.sellIn < 6) {
+      this.quality += 2;
+    } else if (this.sellIn < 11) {
+      this.quality++;
+    }
+    this.limitQuality();
   }
 }
 
@@ -54,6 +73,7 @@ class Shop {
       }
       
       if (item.name === 'Conjured') item.quality -= 1;
+
       if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
         Shop.calcBackstageQuality(item);
       }
