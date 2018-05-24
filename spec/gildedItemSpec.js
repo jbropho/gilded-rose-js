@@ -17,9 +17,5 @@ describe('Gilded Item', function() {
       var sulfuras = new GildedItem('Aged Brie', 10, 10);
       expect(sulfuras.isSpecial()).toBe(true);
     });
-    it('returns true for Conjured items', function() {
-      var sulfuras = new GildedItem('Conjured', 10, 10);
-      expect(sulfuras.isSpecial()).toBe(true);
-    });
   });
 });

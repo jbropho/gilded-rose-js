@@ -12,7 +12,7 @@ class GildedItem extends Item {
   }
 
   isSpecial() {
-    var specialityItems = ['Sulfuras, Hand of Ragnaros', 'Aged Brie', 'Backstage passes to a TAFKAL80ETC concert', 'Conjured'];
+    var specialityItems = ['Sulfuras, Hand of Ragnaros', 'Aged Brie', 'Backstage passes to a TAFKAL80ETC concert'];
     return specialityItems.includes(this.name);
   }
 }
@@ -42,9 +42,10 @@ class Shop {
 
   updateQuality() {
     this.items.forEach(function(item){
-      if (!Shop.nameIsInArray(item, ['Aged Brie', 'Backstage passes to a TAFKAL80ETC concert', 'Sulfuras, Hand of Ragnaros'])) {
+      if (!item.isSpecial()) {
         if (item.quality > 0) item.quality -= 1;
         if (item.name === 'Conjured') item.quality -= 1;
+
       } else {
         if (item.quality < 50) {
           item.quality += 1;
@@ -53,6 +54,7 @@ class Shop {
           }
         }
       }
+      
       if (item.name != 'Sulfuras, Hand of Ragnaros') item.sellIn -= 1;
       
       if (item.sellIn < 0) {
