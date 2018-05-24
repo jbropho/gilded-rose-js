@@ -111,42 +111,6 @@ describe("Gilded Rose", function() {
     });
   });
 
-  describe('Backstage passes', function() {
-     var backstagePass;
-     var before;
-     var after;
-
-     it('quality +=2 when days <= 10', function() {
-       backstagePass = new GildedItem('Backstage passes to a TAFKAL80ETC concert', 9, 10);
-       gildedRose.items.push(backstagePass);
-       
-       before = backstagePass.quality;
-       gildedRose.updateQuality();
-       after = backstagePass.quality;
-
-       expect(after - before).toEqual(2);
-     });
-
-     it('quality +=3 when days <= 5', function() {
-      backstagePass = new GildedItem('Backstage passes to a TAFKAL80ETC concert', 5, 10);
-      gildedRose.items.push(backstagePass);
-
-      before = backstagePass.quality;
-      gildedRose.updateQuality();
-      after = backstagePass.quality;
-
-      expect(after - before).toEqual(3);
-     });
-     
-     it('quality === 0 when days === 0', function() {
-      backstagePass = new GildedItem('Backstage passes to a TAFKAL80ETC concert', 0, 10);
-      gildedRose.items.push(backstagePass);
-
-      gildedRose.updateQuality();
-      expect(backstagePass.quality).toEqual(0);
-     });
-   });
-
    describe('calcBackstageValue', function(){
      it('should += 1 when quality < 50 && sellIn < 11', function() {
          var pass = { sellIn: 10, quality: 40 };

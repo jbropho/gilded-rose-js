@@ -36,10 +36,11 @@ class BackstagePass extends GildedItem {
 
   updateQuality() {
     if (this.sellIn < 6) {
-      this.quality += 2;
+      this.quality += 3;
     } else if (this.sellIn < 11) {
-      this.quality++;
+      this.quality += 2;
     }
+    if (this.sellIn === 0) this.quality = 0;
     this.limitQuality();
   }
 }
@@ -75,9 +76,9 @@ class Shop {
       if (item.name === 'Conjured') item.quality -= 1;
 
       if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
-        Shop.calcBackstageQuality(item);
+        item.updateQuality();
       }
-    
+  
       item.updateSellIn();
       
       if (item.sellIn < 0) {

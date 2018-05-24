@@ -61,15 +61,16 @@ describe('Gilded Item', function() {
   });
 
   describe('back stage pass', function() {
-    it('increases in quality by 1 when sellIn < 11', function() {
+    it('increases in quality by 2 when sellIn < 11', function() {
       var backstage = new BackstagePass('TAFKAL80ETC', 10, 10);
+ 
       var before = backstage.quality;
       var after;
-      
+    
       backstage.updateQuality();
       after = backstage.quality;
 
-      expect(after - before).toEqual(1);
+      expect(after - before).toEqual(2);
     });
     it('increases in quality by 2 when sellIn < 6', function() {
       var backstage = new BackstagePass('TAFKAL80ETC', 5, 10);
@@ -79,7 +80,7 @@ describe('Gilded Item', function() {
       backstage.updateQuality();
       after = backstage.quality;
 
-      expect(after - before).toEqual(2);
+      expect(after - before).toEqual(3);
     });
     it('should not increase above 50', function() {
       var backstage = new BackstagePass('TAFKAL80ETC', 5, 50);
@@ -90,6 +91,11 @@ describe('Gilded Item', function() {
       after = backstage.quality;
 
       expect(after).toEqual(before);
+    });
+    it('sets value to 0 when sellIn is 0', function() {
+      var backstage = new BackstagePass('TAFKAL80ETC', 0, 50);
+      backstage.updateQuality();
+      expect(backstage.quality).toBe(0);
     });
   });
 });
