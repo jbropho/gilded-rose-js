@@ -33,8 +33,22 @@ describe('Gilded Item', function() {
 
     it('does not reduce quality below 0', function() {
       var randomItem = new GildedItem('someThing', 10, 0);
-      randomItem.updateQuality();
+      randomItem.updateQuality()
       expect(randomItem.quality).toBe(0);
     });
   });
+
+  describe('update sellIn', function() {
+    it('does not change sellIn for sulfuras', function() {
+      var sulfura = new GildedItem('Sulfuras, Hand of Ragnaros',  80, 100);
+      sulfura.updateSellIn();
+      expect(sulfura.sellIn).toEqual(80);
+    });
+
+    it('changes sellIn by -1', function() {
+     var notSulfura = new GildedItem('something else', 80, 100);
+     notSulfura.updateSellIn();
+     expect(notSulfura.sellIn).toEqual(79);
+    });
+ });
 });

@@ -19,6 +19,10 @@ class GildedItem extends Item {
   updateQuality() {
     if (this.quality > 0) this.quality--;
   }
+
+  updateSellIn() {
+    if (this.name !== 'Sulfuras, Hand of Ragnaros') this.sellIn -= 1;
+  }
 }
 
 class Shop {
@@ -44,15 +48,17 @@ class Shop {
     this.items.forEach(function(item){
 
       if (!item.isSpecial()) {
-        if (item.quality > 0) item.updateQuality(); 
+        item.updateQuality(); 
+      } else if (item.quality < 50) {
+        item.quality += 1;
       }
-      else if (item.quality < 50) item.quality += 1;
       
       if (item.name === 'Conjured') item.quality -= 1;
       if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
         Shop.calcBackstageQuality(item);
       }
-      if (item.name !== 'Sulfuras, Hand of Ragnaros') item.sellIn -= 1;
+    
+      item.updateSellIn();
       
       if (item.sellIn < 0) {
          if (item.quality > 0) {
