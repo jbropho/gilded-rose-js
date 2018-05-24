@@ -22,10 +22,6 @@ class Shop {
     this.items = items;
   }
   
-  static nameIsInArray(item, arr) {
-    return arr.includes(item.name)
-  }
-
   static limitItemQuality(item) {
     if (item.name === 'Sulfuras, Hand of Ragnaros' && item.quality > 80) {
       item.quality = 80;

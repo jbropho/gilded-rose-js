@@ -147,18 +147,6 @@ describe("Gilded Rose", function() {
      });
    });
 
-   describe('nameIsInArray', function() {
-     it('should return true when matching an item name and array', function() {
-        var item = { name: 'example' };
-        var response = Shop.nameIsInArray(item, ['example', 'things', 'stuff']);
-        expect(response).toBe(true);
-     });
-     it('should return false when not matching an item name in an array', function() {
-        var item = { name: 'stuff' };
-        var response = Shop.nameIsInArray(item, ['things', 'more things']);
-     });
-   });
-
    describe('calcBackstageValue', function(){
      it('should += 1 when quality < 50 && sellIn < 11', function() {
          var pass = { sellIn: 10, quality: 40 };
