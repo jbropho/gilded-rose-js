@@ -111,26 +111,6 @@ describe("Gilded Rose", function() {
     });
   });
 
-   describe('calcBackstageValue', function(){
-     it('should += 1 when quality < 50 && sellIn < 11', function() {
-         var pass = { sellIn: 10, quality: 40 };
-         Shop.calcBackstageQuality(pass);
-         expect(pass.quality).toBe(41);
-     });
-
-     it('should += 2 when quality < 49 && sellIn < 6', function() {
-        var pass = { sellIn: 5, quality: 40};
-        Shop.calcBackstageQuality(pass);
-        expect(pass.quality).toBe(42);
-     });
-     
-     it('should not increase quality above 50', function() {
-        var pass = { sellIn: 5, quality: 49};
-        Shop.calcBackstageQuality(pass);
-        expect(pass.quality).toBe(50);
-     });
-   });
-
    describe('limitItemQuality', function() {
       it('sets item quality to 50 if quality > 50', function() {
          var pass = { sellIn: 5, quality: 55};

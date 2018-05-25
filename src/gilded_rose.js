@@ -57,13 +57,7 @@ class Shop {
       item.quality = 50;
     }
   }
-
-  static calcBackstageQuality(item) {
-    if (item.sellIn < 11) item.quality += 1;
-    if (item.sellIn < 6) item.quality += 1;
-    Shop.limitItemQuality(item); 
-  }
-
+  
   updateQuality() {
     this.items.forEach(function(item){
 
